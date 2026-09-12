@@ -1,0 +1,75 @@
+RFC-C002 Appendix A — Independence Telemetry
+Version: 2.6 — Experimental Module — NOT NORMATIVE
+Status: Provisional priors, unvalidated. Do not use for user-facing judgments without pilot validation.
+
+Purpose: This appendix attempts to operationalize Article VII (Competence). It is not part of the core identity of Chicory. Implementations may omit this entirely and remain Chicory.
+
+================================================================
+A1. INTENT
+================================================================
+Measure reduced reliance (I_behav) and competence (G) separately, then gate them.
+
+I_idx = G × I_behav
+
+Rationale: Competence without behavioral expression is unobservable. Behavioral expression without competence is false independence.
+
+================================================================
+A2. COMPONENTS (Provisional Weights)
+================================================================
+I_behav = weighted sum of measurable behavioral signals:
+- Ar (Agency / reduced prompting): 0.40 — most direct Art. II signal
+- Tv (Task completion pattern): 0.30 — highest observability
+- El (Effort latency / intention-action gap): 0.20 — noisiest proxy
+- Sd (System self-direction): 0.10 — coarse but system-controlled
+
+All weights are priors. Must be tested against G during pilot.
+If a component is unmeasurable in a window: I_behav = Σ(w_i·s_i | measurable)/Σ(w_i | measurable). Log excluded components (Art. III).
+
+G (Competence) — Requires Evaluate activity or graded artifacts. Not self-reported confidence.
+G_sufficiency: Requires ≥3 independent samples spanning ≥2 distinct Wt (task-weight) values. Fewer → "insufficient N"; no I_idx.
+No measurable G → I_idx shall not be computed. I_behav may be logged as "competence unverified" for diagnostics only.
+
+Task Weight (Wt) reference — ILLUSTRATIVE, not prescriptive:
+- Dilution (M1V1=M2V2): 0.8
+- Specific heat (q=mcΔT): 0.9
+- pH calculation: 0.9
+- Limiting reactant: 1.0
+- Equilibrium constant (K): 1.0
+- Acid-base titration (Henderson-Hasselbalch): 1.1
+Provisional additions: Gram stain 1.0; selective vs differential media 0.8; aseptic smear 0.7; calorimetry 0.9
+
+A_s = min(Ar_bar, A_cap)/A_cap, A_cap=1.0 (example normalization)
+
+================================================================
+A3. KPI OF RECORD
+================================================================
+Metric of record is ΔI_idx over rolling 14-day window. Level is contextual; trajectory is the finding (OP 2: Consistency beats intensity).
+
+Example trajectories (from v2.5 simulation, illustrative only):
+Wk1: I_behav 0.17, G 0.25, I_idx 0.04
+Wk2: I_behav 0.44, G 0.70, I_idx 0.31
+Wk3: I_behav 0.87, G 0.94, I_idx 0.82 — meets reliance target; diagnostic of reduced reliance, NOT proof of competence.
+
+================================================================
+A4. DECISION RULES FOR ΔI_idx
+================================================================
+ΔI_idx ↑, ΔG≥0, ΔI_behav≥0 → Healthy internalization → Continue; reduce scaffolding
+ΔI_idx ↑, ΔG<0, ΔI_behav>0 → Avoidance masked as independence → Name pattern (Art IX); seek Evaluate sample; verify Wt mix
+ΔI_idx ↑, ΔG≥0, ΔI_behav<0 → Competence gain masking situational regression → Investigate load; hold scaffolding steady
+ΔI_idx ↓, ΔG<0 (any I_behav) → Competence decay or harder material → Re-scaffold; verify Wt mix
+ΔI_idx ↓, ΔG≥0, ΔI_behav<0 → Situational load or withdrawal → Open conversation; proportionate response (Art V)
+flat → Steady state → Continue; sample G if overdue
+
+CRITICAL: These are diagnostic hypotheses, not labels to present to user. Present observations, not judgments. Follow Art VI (Respect).
+
+================================================================
+A5. SAFEGUARDS
+================================================================
+1. Never present I_idx as a grade or worth metric.
+2. Require human review before any automated scaffolding change based on I_idx.
+3. If I_behav rises while G falls for >2 windows, pause telemetry and return to Charter-only behavior. Investigate task difficulty vs avoidance.
+4. All telemetry must be user-viewable on request.
+5. Deletion: User can delete telemetry history without affecting Charter function.
+
+================================================================
+END APPENDIX A
