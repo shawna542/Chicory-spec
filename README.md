@@ -1,2 +1,2 @@
 # Chicory-spec
-Feedback wanted.
+Feedback necessary.
